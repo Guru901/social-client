@@ -1,29 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import LoginContext from "../../context/LoginContext";
 
 const UploadForm = () => {
+  const { user } = useContext(LoginContext);
   const [form, setFrom] = useState({});
+
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFrom({
       ...form,
       [e.target.name]: e.target.value,
+      userId: user.user._id,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://social-qxct.onrender.com/api/post",
-        {
-          method: "POST",
-          body: JSON.stringify(form),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch("http://localhost:3000/api/post", {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const data = await response.json();
       if (data.state) {
@@ -58,7 +59,7 @@ const UploadForm = () => {
         ></textarea>
 
         <div className="flex items-center justify-start">
-          <input type="file" name="file" hidden />
+          <input type="file" name="file" hidden onChange={handleChange} />
           <p
             className="text-xl text-blue-500 mr-5 cursor-pointer"
             onClick={fileUpload}

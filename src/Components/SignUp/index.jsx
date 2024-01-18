@@ -46,11 +46,19 @@ const SignUp = () => {
 
       const res = await data.json();
       if (res.state) {
-        setUser(req.username);
+        setUser(res.username);
         setLogin(true);
         navigate("/feed");
       }
+      if (!res.state) {
+        setLogin(false);
+        setError("Username taken choose another");
+      }
     }
+  };
+
+  const fileUpload = () => {
+    document.getElementsByName("avatar")[0].click();
   };
 
   return (
@@ -77,6 +85,13 @@ const SignUp = () => {
           className="p-5 text-3xl rounded-md outline-none bg-zinc-800"
           onChange={(e) => setPswd(e.target.value)}
         />
+        <input type="file" name="avatar" hidden onChange={handleChange} />
+        <p
+          className="text-xl text-blue-500 mr-5 cursor-pointer text-start"
+          onClick={fileUpload}
+        >
+          Avatar
+        </p>
         <p className="text-red-600 text-lg">{error}</p>
         <div className="flex flex-col items-start">
           <p className="text-xl">Remember you can't ever change the password</p>

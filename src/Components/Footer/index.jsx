@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="flex justify-between h-20 bg-[#111111] fixed bottom-0 w-screen max-w-[500px] items-center px-12">
+    <div className="flex justify-between justify-self-center h-24 bg-[#222222] fixed bottom-12 w-[90svw] max-w-[500px] items-center px-12 z-50 rounded-lg left-[4%]">
       <Link to="/feed">
         <MdHome size={24} />
       </Link>
 
       <MdHome size={24} />
       <Link to="/post">
-        <div className="bg-[#e65b0c] w-[5rem] h-[5rem] rounded-full flex justify-center items-center absolute bottom-6 translate-x-[-50%]">
+        <div className="bg-[#e65b0c] w-[8rem] h-[5rem] rounded-full flex justify-center items-center bottom-2">
           <FaPlus size={30} />
         </div>
       </Link>

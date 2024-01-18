@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { toast } from "react-toastify";
 import LoginContext from "../../context/LoginContext";
 
 const Loginform = () => {
@@ -20,7 +19,7 @@ const Loginform = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await fetch("https://social-qxct.onrender.com/api/login", {
+    const data = await fetch("http://localhost:3000/api/login", {
       method: "POST",
       body: JSON.stringify(form),
       headers: {
@@ -29,7 +28,7 @@ const Loginform = () => {
     });
     const res = await data.json();
     if (res.state) {
-      setUser(res.username);
+      setUser(res);
       setLogin(true);
       navigate("/feed");
     } else {
@@ -66,7 +65,7 @@ const Loginform = () => {
         <input
           type="submit"
           value="Submit"
-          className="bg-[#e65c0c] py-5 text-2xl rounded-md"
+          className="bg-[#e65c0c] py-5 text-2xl rounded-md cursor-pointer"
         />
       </form>
     </div>

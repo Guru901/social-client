@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { LuArrowBigUpDash, LuArrowBigDownDash } from "react-icons/lu";
 import { FaArrowUp } from "react-icons/fa";
 import LoginContext from "../../context/LoginContext";
+import { Link } from "react-router-dom";
 
 const All = () => {
   const [posts, setPosts] = useState([]);
-  const [clickedPostBody, setClickedPostBody] = useState(""); // New state variable
 
-  const { user } = useContext(LoginContext);
+  const { setPost } = useContext(LoginContext);
 
   useEffect(() => {
     const getAllPosts = async () => {
@@ -26,19 +26,8 @@ const All = () => {
     getAllPosts();
   }, []);
 
-  const postFind = async (_id) => {
-    setClickedPostBody(_id);
-
-    const post = await fetch("http://localhost:3000/api/posst", {
-      method: "POST",
-      body: JSON.stringify(_id),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await post.json();
-    console.log(data);
+  const handlePostClick = (elem) => {
+    setPost(elem._id);
   };
 
   return (
@@ -46,9 +35,9 @@ const All = () => {
       {posts.map((elem, index) => {
         return (
           <div
-            className="border-[1px] rounded-2xl flex flex-col gap-5 text-wrap py-7"
+            className="border-[1px] rounded-2xl flex flex-col gap-5 text-wrap pb-4 overflow-hidden"
             key={index}
-            onClick={() => postFind(elem.body)}
+            onClick={() => handlePostClick(elem)}
           >
             <img
               src={elem.img}
@@ -61,18 +50,21 @@ const All = () => {
                   <LuArrowBigUpDash size={30} />
                   <LuArrowBigDownDash size={30} />
                 </div>
-                <div className="px-2 flex flex-col gap-2" onClick={postFind}>
+                <div className="px-2 flex flex-col gap-2 overflow-hidden">
                   <h1 className="text-xl">Author - Anonymouse</h1>
                   <h1 className="text-3xl font-bold">{elem.title}</h1>
-                  <p className="text-2xl elem-body">{elem.body}</p>
-                  <p className="text-2xl elem-body">{elem._id}</p>
+                  <p className="text-2xl elem-body max-w-[60vw] overflow-hidden text-ellipsis whitespace-nowrap">
+                    {elem.body}
+                  </p>
                 </div>
               </div>
-              <div className="flex mb-8">
-                <div className="bg-white p-2 rounded-full rotate-45 flex justify-center items-center">
-                  <FaArrowUp color="black" size={20} />
+              <Link to={`/post/${elem._id}`} key={index}>
+                <div className="flex mb-5">
+                  <div className="bg-white p-2 rounded-full rotate-45 flex justify-center items-center">
+                    <FaArrowUp color="black" size={20} />
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         );

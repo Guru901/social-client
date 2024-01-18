@@ -8,18 +8,20 @@ import Post from "./pages/Post";
 import Feed from "./pages/Feed";
 import LoginContext from "./context/LoginContext";
 import Profile from "./pages/Profile";
+import More from "./Components/More";
 const App = () => {
   const { login } = useContext(LoginContext);
 
   return (
     <BrowserRouter>
-      <div className="bg-zinc-900 w-screen min-h-[100svh] text-white py-4 relative">
+      <div className="w-screen min-h-[100svh] text-white py-4 relative">
         <Routes>
-          {/* {login ? (
+          {login ? (
             <>
               <Route path="/post" element={<Post />} />
               <Route path="/feed" element={<Feed />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/post/:id" element={<More />} />
             </>
           ) : (
             <>
@@ -28,11 +30,13 @@ const App = () => {
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
             </>
-          )} */}
+          )}
 
-          <Route path="/post" element={<Post />} />
+          {/* <Route path="/post" element={<Post />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/" element={<Profile />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/post/:id" element={<More />} /> */}
         </Routes>
         <Footer />
       </div>

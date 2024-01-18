@@ -4,7 +4,10 @@ import Loginform from "../../Components/Loginform";
 const Login = () => {
   return (
     <div className="w-[100swv] h-[100svh] text-white text-center flex justify-center overflow-clip">
-      <img src="/1.png" className="w-full h-full absolute object-cover z-[1]" />
+      <img
+        src="/1.png"
+        className="w-full h-full absolute object-cover z-[-1] top-0"
+      />
       <div className="w-[100swv] h-[100svh] max-w-[500px] flex flex-col justify-between py-16 pb-28 overflow-clip z-[2]">
         <h1 className="text-6xl">Welcome Back</h1>
         <div className="w-screen text-start px-16">

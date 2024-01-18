@@ -21,3 +21,13 @@ body {
 ::-webkit-scrollbar {
   width: 0;
 }
+
+.comment-input {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.comment-btn {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
