@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Footer from "./Components/Footer";
 import GetStarted from "./Components/GetStarted";
 import Signup from "./pages/signup";
+import User from "./Components/User";
 import Login from "./pages/Login";
 import Post from "./pages/Post";
 import Feed from "./pages/Feed";
@@ -21,6 +22,7 @@ const App = () => {
               <Route path="/post" element={<Post />} />
               <Route path="/feed" element={<Feed />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:id" element={<User />} />
               <Route path="/post/:id" element={<More />} />
             </>
           ) : (
@@ -31,12 +33,13 @@ const App = () => {
               <Route path="/login" element={<Login />} />
             </>
           )}
-
-          {/* <Route path="/post" element={<Post />} />
+          {/* 
+          <Route path="/post" element={<Post />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/" element={<Profile />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/post/:id" element={<More />} /> */}
+          <Route path="/post/:id" element={<More />} />
+          <Route path="/profile/:id" element={<User />} /> */}
         </Routes>
         <Footer />
       </div>

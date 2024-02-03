@@ -8,21 +8,21 @@ import LoginContextProvider from "./context/LoginContextProvider.jsx";
 import UserContext from "./context/UserContext.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <LoginContextProvider>
-      <App />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-    </LoginContextProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <LoginContextProvider>
+    <App />
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+    />
+  </LoginContextProvider>
+  // </React.StrictMode>
 );

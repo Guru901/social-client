@@ -3,17 +3,22 @@ import { useParams } from "react-router-dom";
 import LoginContext from "../../context/LoginContext";
 
 const More = () => {
-  const { id } = useParams();
   const [res, setRes] = useState({});
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
   const [comment, setComment] = useState([]);
 
+  const { id } = useParams();
+  const { user } = useContext(LoginContext);
+
   const fetchComments = async () => {
     try {
-      const comments = await fetch(`http://localhost:3000/api/comment/${id}`, {
-        method: "GET",
-      });
+      const comments = await fetch(
+        `https://social-qxct.onrender.com/api/comment/${id}`,
+        {
+          method: "GET",
+        }
+      );
       const data = await comments.json();
       data.reverse();
       setComment(data);
@@ -24,13 +29,16 @@ const More = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/api/postcomment", {
-      method: "POST",
-      body: JSON.stringify(form),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://social-qxct.onrender.com/api/postcomment",
+      {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await response.json();
     setComment([...comment, data]);
@@ -44,7 +52,7 @@ const More = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const API = "http://localhost:3000/api";
+      const API = "https://social-qxct.onrender.com/api";
       try {
         setLoading(true);
         const response = await fetch(`${API}/${id}`, {
@@ -74,6 +82,7 @@ const More = () => {
       ...form,
       [e.target.name]: e.target.value,
       id,
+      user: user,
     });
   };
 
@@ -85,13 +94,15 @@ const More = () => {
         className="w-full h-full object-cover absolute top-0 z-[-1]"
       />
       {loading ? (
-        "loading..."
+        <div className="w-screen h-screen flex justify-center items-center">
+          <div className="spinner"></div>
+        </div>
       ) : (
         <div className="flex flex-col gap-5 p-8">
           <div className="flex flex-col gap-5">
             <h1 className="text-5xl">{res.title}</h1>
             <img
-              src={res.img}
+              src={`${res.image}`}
               alt=""
               className="w-[95vw] object-cover rounded-md"
             />
@@ -122,7 +133,7 @@ const More = () => {
                 className="border-[1px] p-5 flex flex-col gap-5 rounded-xl"
                 key={index}
               >
-                <h1 className="text-3xl">User - Anonymouse</h1>
+                <h1 className="text-3xl">User - {elem.username}</h1>
                 <p className="text-2xl">{elem.text}</p>
               </div>
             ))}
